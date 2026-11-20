@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Override>
+  <Item name="Supplies Cabinet" identifier="suppliescabinet" tags="container,suppliescontainer" linkable="true" pickdistance="150" waterproof="true" scale="0.5">
+    <Sprite texture="Content/Items/Containers/containers.png" depth="0.84" sourcerect="889,349,120,132" origin="0.5,0.5" />
+    <ItemContainer capacity="6" slotsperrow="3" canbeselected="true" hideitems="true" msg="ItemMsgInteractSelect">
+      <GuiFrame relativesize="0.16,0.22" anchor="Center" style="ItemUI" />
+      <Containable items="smallitem,mediumitem" excludedidentifiers="mobilecontainer" />
+    </ItemContainer>
+    <!-- backwards compatibility for older versions in which mobile containers like storage
+    containers were containable in any cabinet -->
+    <Upgrade gameversion="1.1.0.0" campaignsaveonly="true">
+      <ItemContainer>
+        <Containable items="smallitem,mediumitem" />
+        <ClearSubContainerRestrictions />
+      </ItemContainer>
+    </Upgrade>
+    <Deconstruct time="10">
+      <Item identifier="aluminium" amount="2" />
+    </Deconstruct>
+    <Fabricate suitablefabricators="fabricator" requiredtime="20">
+      <Item identifier="aluminium" amount="2" />
+    </Fabricate>
+    <Body width="120" height="132" density="15" />
+    <Holdable selectkey="Select" pickkey="Use" slots="RightHand+LeftHand" msg="ItemMsgDetachWrench" PickingTime="10.0" aimpos="65,-10" handle1="0,0" attachable="true" attached="true" attachedByDefault="true" aimable="true">
+      <RequiredItem identifier="wrench" type="Equipped" />
+      <StatusEffect type="OnActive" target="Character" SpeedMultiplier="0.75" setvalue="true" />
+    </Holdable>
+  </Item>
+</Override>

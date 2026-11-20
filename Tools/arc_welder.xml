@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Item name="Arc Welder" identifier="arc_welder" category="Equipment" Tags="smallitem,weldingequipment,tool,mountableweapon" cargocontaineridentifier="metalcrate" description="" Scale="0.5" impactsoundtag="impact_metal_light">
+  <PreferredContainer secondary="respawncontainer_kingofthehull" amount="2" spawnprobability="1" notcampaign="true" />
+  <PreferredContainer primary="engcab" amount="1" spawnprobability="1" notcampaign="true" />
+  <PreferredContainer secondary="supplycab" amount="1" spawnprobability="0.2" notcampaign="true" notpvp="true" />
+  <PreferredContainer primary="outpostsupplycab" amount="1" spawnprobability="0.5" />
+  <PreferredContainer primary="outpostcrewcabinet" amount="1" spawnprobability="0.1" />
+  <PreferredContainer primary="wrecksupplycab,beaconsupplycab" amount="1" spawnprobability="0.05" />
+  <PreferredContainer primary="wreckstoragecab,abandonedstoragecab,piratestoragecab" amount="1" spawnprobability="0.05" />
+  <PreferredContainer primary="wreckengcab,abandonedengcab,pirateengcab,outpostengcab,beaconengcab" amount="1" spawnprobability="0.1" />
+  <Price baseprice="300">
+    <Price storeidentifier="merchantoutpost" minavailable="3" />
+    <Price storeidentifier="merchantcity" minavailable="2" />
+    <Price storeidentifier="merchantresearch" multiplier="1.25" minavailable="2" />
+    <Price storeidentifier="merchantmilitary" multiplier="1.25" minavailable="2" />
+    <Price storeidentifier="merchantmine" multiplier="0.9" minavailable="10" />
+    <Price storeidentifier="merchantengineering" minavailable="5" multiplier="0.9" />
+  </Price>
+  <!-- <InventoryIcon texture="Content/Items/InventoryIconAtlas.png" sourcerect="64,64,64,64" origin="0.5,0.5" /> -->
+  <Sprite texture="arc_welder.png" sourcerect="0,3,145,87" depth="0.55" origin="0.5,0.5" />
+  <!-- the item takes 10 seconds to break down in a deconstructor and turns into steel and plastic -->
+  <Deconstruct time="10">
+    <Item identifier="steel" />
+    <Item identifier="plastic" />
+    <Item identifier="fpgacircuit" />
+    <Item identifier="copper" />
+  </Deconstruct>
+  <Fabricate suitablefabricators="fabricator" requiredtime="20">
+    <RequiredSkill identifier="mechanical" level="45" />
+    <RequiredItem identifier="weldingtool" />
+    <Item identifier="fpgacircuit" amount="1" />
+    <Item identifier="copper" amount="1" />
+  </Fabricate>
+  <!-- physics body -->
+  <Body width="150" height="60" density="25" />
+  <!-- the character will hold the item 50 pixels in front of him, with his hands at the handle1 and handle2 positions -->
+  <Holdable slots="Any,RightHand+LeftHand" controlpose="true" aimpos="60,0" handle1="-62,-16" handle2="-10,-6" msg="ItemMsgPickUpSelect" />
+  <RepairTool firedamage="10.0" structurefixamount="3.0" range="150" barrelpos="35,12" particles="weld" repairmultiple="true" repairthroughwalls="false" combatpriority="3" levelwallfixamount="-0.425" targetforce="10">
+    <!-- the item must contain a welding fuel tank for it to work -->
+    <RequiredItems items="mobilebattery" type="Contained" msg="ItemMsgWeldingFuelRequired" />
+    <RequiredSkill identifier="mechanical" level="50" />
+    <ParticleEmitter particle="weld" particlespersecond="50" copyentityangle="true" />
+    <ParticleEmitterHitStructure particle="weldspark" particlespersecond="400" anglemin="-50" anglemax="50" velocitymin="200" velocitymax="1000" colormultiplier="100,150,255,255" />
+    <ParticleEmitterHitStructure particle="GlowDot" particlespersecond="60" emitinterval="0.7" particleamount="20" scalemin="0.9" scalemax="1.2" anglemin="0" anglemax="360" velocitymin="10" velocitymax="50" colormultiplier="120,160,255,255" />
+    <ParticleEmitterHitStructure particle="MistSmoke" particlespersecond="10" anglemin="-10" anglemax="10" velocitymin="0" velocitymax="50" />
+    <ParticleEmitterHitItem identifiers="door,hatch,ductblock" particle="weldspark" particlespersecond="400" anglemin="-50" anglemax="50" velocitymin="200" velocitymax="1000" colormultiplier="100,150,255,255" />
+    <ParticleEmitterHitItem identifiers="door,hatch,ductblock" particle="MistSmoke" particlespersecond="10" anglemin="-10" anglemax="10" velocitymin="10" velocitymax="100" />
+    <ParticleEmitterHitCharacter particle="fleshsmoke" particlespersecond="3" anglemin="-5" anglemax="5" velocitymin="0" velocitymax="50" />
+    <sound file="Content/Items/Tools/WeldingLoop.ogg" type="OnUse" range="500.0" loop="true" />
+    <!-- when using, the contained welding fuel tank will detoriate (= lose fuel) -->
+    <StatusEffect type="OnUse" targettype="Contained" targets="mobilebattery" Condition="-1.7" />
+    <!-- welding a door, it will get stuck after a while -->
+    <StatusEffect type="OnSuccess" targettype="UseTarget" targets="weldable" Stuck="7.5" />
+    <StatusEffect type="OnSuccess" targettype="UseTarget" targets="item" Condition="-4.5">
+      <Conditional HasTag="neq weldable" />
+    </StatusEffect>
+    <!-- do burn damage to characters -->
+    <StatusEffect type="OnSuccess" targettype="Limb">
+      <Affliction identifier="burn" amount="3.0" />
+    </StatusEffect>
+    <!-- the tool can fix structures, i.e. walls and windows -->
+    <Fixable identifier="structure" />
+    <NonFixable identifier="thalamus,ice" />
+    <LightComponent LightColor="140,180,255,160" Range="150" Flicker="0.5">
+      <sprite texture="Content/Items/Electricity/lightsprite.png" origin="0.5,0.5" />
+    </LightComponent>
+  </RepairTool>
+  <!-- one welding fuel or oxygen tank can be contained inside the welding tool -->
+  <ItemContainer capacity="1" maxstacksize="1" hideitems="true" containedstateindicatorstyle="battery">
+    <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="128,448,64,64" origin="0.5,0.5" />
+    <Containable items="mobilebattery">
+      <StatusEffect type="OnContaining" targettype="This" Voltage="1.0" setvalue="true" />
+    </Containable>
+  </ItemContainer>
+  <aitarget sightrange="2000" soundrange="500" fadeouttime="3" />
+  <Quality>
+    <QualityStat stattype="RepairToolStructureRepairMultiplier" value="0.1" />
+  </Quality>
+  <SkillRequirementHint identifier="mechanical" level="60" />
+</Item>

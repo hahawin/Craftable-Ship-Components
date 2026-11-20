@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Override>
+  <Item name="Hospital Bed" identifier="opdeco_hospitalbed" width="416" height="192" texturescale="1.0,1.0" scale="0.5" noninteractable="false" category="Decorative">
+    <Upgrade gameversion="0.12.0.0" noninteractable="false" />
+    <sprite texture="Content/Map/Outposts/Art/MedBayAssets.png" sourcerect="96,304,416,192" depth="0.97" premultiplyalpha="false" origin="0.5,0.5" />
+    <Controller UserPos="0,-300" direction="Right" hidehud="false" issecondaryitem="true" canbeselected="true" noninteractablewhenflippedy="true" drawuserbehind="true">
+      <!-- don't allow laying in bed when wearing an exosuit -->
+      <RequiredItem items="deepdivinglarge" type="Picked" requireempty="true" />
+      <limbposition limb="Head" position="-6,-10" />
+      <limbposition limb="Torso" position="104,0" />
+      <limbposition limb="Waist" position="244,-80" />
+      <limbposition limb="RightFoot" position="380,-20" />
+      <limbposition limb="LeftFoot" position="380,-20" />
+      <limbposition limb="RightHand" position="234,-10" allowusinglimb="false" />
+      <limbposition limb="LeftHand" position="234,-10" allowusinglimb="false" />
+      <StatusEffect type="OnActive" target="Character">
+        <reduceaffliction type="damage" strength="0.150" />
+        <reduceaffliction identifier="concussion" strength="0.100" />
+        <reduceaffliction identifier="infection" strength="0.050" />
+        <reduceaffliction identifier="bloodloss" strength="0.100" />
+        <reduceaffliction identifier="bleeding" strength="0.100" />
+        <reduceaffliction identifier="nausea" strength="0.9" />
+        <reduceaffliction identifier="drunk" strength="0.9" />
+        <reduceaffliction identifier="opiatewithdrawal" strength="0.10" />
+        <reduceaffliction identifier="opiateaddiction" strength="0.10" />
+        <reduceaffliction identifier="chemwithdrawal" strength="0.10" />
+        <reduceaffliction identifier="chemaddiction" strength="0.10" />
+      </StatusEffect>
+    </Controller>
+    <Upgrade gameversion="0.20.8.0">
+      <Controller>
+        <RequiredItem items="deepdivinglarge" type="Picked" requireempty="true" />
+      </Controller>
+    </Upgrade>
+    <Deconstruct time="10">
+      <Item identifier="aluminium" amount="2" />
+      <Item identifier="organicfiber" amount="2" />
+      <Item identifier="fpgacircuit" amount="1" />
+    </Deconstruct>
+    <Fabricate suitablefabricators="fabricator" requiredtime="20">
+      <Item identifier="aluminium" amount="2" />
+      <Item identifier="organicfiber" amount="2" />
+      <Item identifier="fpgacircuit" amount="1" />
+    </Fabricate>
+    <Body width="416" height="192" density="15" />
+    <Holdable selectkey="Select" pickkey="Use" slots="RightHand+LeftHand" msg="ItemMsgDetachWrench" PickingTime="10.0" aimpos="65,-10" handle1="0,0" attachable="true" aimable="true" attached="true" attachedByDefault="true">
+      <RequiredItem identifier="wrench" type="Equipped" />
+      <StatusEffect type="OnActive" target="Character" SpeedMultiplier="0.65" setvalue="true" />
+    </Holdable>
+  </Item>
+</Override>

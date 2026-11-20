@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Item name="Railgun Rack (Deprecated)" identifier="railgunshellrack_craftable" tags="container,railgunammocontainer" pickdistance="120" scale="0.5" canflipx="false" canflipy="false">
+  <Sprite texture="Content/Items/Containers/containers.png" depth="0.84" sourcerect="330,811,218,212" origin="0.5,0.5" />
+  <ItemContainer hideitems="false" drawinventory="true" capacity="6" slotsperrow="6" itempos="32,-100" iteminterval="30,0" itemrotation="90" canbeselected="true" msg="ItemMsgInteractSelect">
+    <Upgrade gameversion="0.18.0.0" itempos="32,-100" iteminterval="30,0" />
+    <GuiFrame relativesize="0.3,0.2" anchor="Center" style="ItemUI" />
+    <Containable items="railgunammo" />
+  </ItemContainer>
+  <Deconstruct time="10">
+    <Item identifier="steel" amount="2" />
+  </Deconstruct>
+  <Body width="218" height="212" density="25" />
+  <Holdable selectkey="Select" pickkey="Use" slots="RightHand+LeftHand" msg="ItemMsgDetachWrench" PickingTime="10.0" aimpos="65,-10" handle1="0,0" attachable="true" aimable="true">
+    <RequiredItem identifier="wrench" type="Equipped" />
+    <StatusEffect type="OnActive" target="Character" SpeedMultiplier="0.55" setvalue="true" />
+  </Holdable>
+</Item>

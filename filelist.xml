@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<contentpackage name="Craftable Ship Components" modversion="0.9.0" corepackage="False" steamworkshopid="3386299824" gameversion="1.7.7.0" expectedhash="DDC9C07C9CED43544BCD12871E7DD0C5">
+  <Item file="%ModDir%/Command/sonar_monitor.xml" />
+  <Item file="%ModDir%/Command/status_monitor.xml" />
+  <Item file="%ModDir%/Containers/coilgun_ammo_shelf_override.xml" />
+  <Item file="%ModDir%/Containers/coilgun_ammo_shelf.xml" />
+  <Item file="%ModDir%/Containers/crateshelf.xml" />
+  <Item file="%ModDir%/Containers/diving_suit_locker_override.xml" />
+  <Item file="%ModDir%/Containers/diving_suit_locker.xml" />
+  <Item file="%ModDir%/Containers/extinguisherbracket.xml" />
+  <Item file="%ModDir%/Containers/large_steel_cabinet_override.xml" />
+  <Item file="%ModDir%/Containers/large_steel_cabinet.xml" />
+  <Item file="%ModDir%/Containers/medium_steel_cabinet_override.xml" />
+  <Item file="%ModDir%/Containers/medium_steel_cabinet.xml" />
+  <Item file="%ModDir%/Containers/oxygen_tank_locker_override.xml" />
+  <Item file="%ModDir%/Containers/oxygen_tank_locker.xml" />
+  <Item file="%ModDir%/Containers/railgun_rack_override.xml" />
+  <Item file="%ModDir%/Containers/railgun_rack.xml" />
+  <Item file="%ModDir%/Containers/supplies_cabinet_override.xml" />
+  <Item file="%ModDir%/Outpost/captains_chair.xml" />
+  <Item file="%ModDir%/Outpost/hospital_bed.xml" />
+  <Item file="%ModDir%/Power/charging_dock_deprecated.xml" />
+  <Item file="%ModDir%/Power/charging_dock.xml" />
+  <Item file="%ModDir%/Pump/small_pump.xml" />
+  <Item file="%ModDir%/Tools/ammo_scooter.xml" />
+  <Item file="%ModDir%/Tools/arc_welder.xml" />
+</contentpackage>

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Override>
+  <Item name="Coilgun Ammo Shelf" identifier="coilgunammoshelf" tags="container,ammoboxcontainer" linkable="true" pickdistance="150" waterproof="true" scale="0.5" description="A metal frame designed to hold coilgun ammo. ( Place by pressing aim + use )">
+    <Sprite texture="Content/Items/Containers/containers.png" depth="0.84" sourcerect="188,717,140,306" canflipx="false" origin="0.5,0.5" />
+    <ItemContainer capacity="3" canbeselected="true" hideitems="false" itempos="70,-52" iteminterval="0,-96" msg="ItemMsgInteractSelect">
+      <GuiFrame relativesize="0.2,0.2" anchor="Center" style="ItemUI" />
+      <Containable items="ammobox,coilgunammo,depthchargeammo" excludedidentifiers="boardingpod" />
+    </ItemContainer>
+    <Body width="150" height="306" density="25" />
+    <Deconstruct time="10">
+      <Item identifier="steel" />
+      <Item identifier="iron" />
+    </Deconstruct>
+    <Fabricate suitablefabricators="fabricator" requiredtime="15">
+      <RequiredItem identifier="steel" />
+      <RequiredItem identifier="iron" />
+    </Fabricate>
+    <Holdable selectkey="Select" pickkey="Use" slots="RightHand+LeftHand" msg="ItemMsgDetachWrench" PickingTime="10.0" aimpos="65,-10" handle1="0,0" attachable="true" attached="true" attachedByDefault="true" aimable="true">
+      <RequiredItem identifier="wrench" type="Equipped" />
+      <StatusEffect type="OnActive" target="Character" SpeedMultiplier="0.65" setvalue="true" />
+    </Holdable>
+  </Item>
+</Override>
